@@ -188,4 +188,3 @@ This project is licensed under the MIT License.
 - **Twitter/X:** For interface inspiration
 - **CS50W:** For project inspiration and guidance
 - **Open Source Community:** For various tools and libraries used in this project
-```
