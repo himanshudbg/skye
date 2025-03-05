@@ -1,4 +1,4 @@
-```markdown:/Users/himanshuharode/Studies/Social-Network-master/README.md
+```
 # Social Network Platform
 
 A modern social networking platform built with Django and TailwindCSS, featuring a Twitter-inspired interface with enhanced user experience and premium features.
@@ -46,8 +46,8 @@ A modern social networking platform built with Django and TailwindCSS, featuring
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/yourusername/Social-Network.git
-   cd Social-Network
+   git clone https://github.com/himanshudbg/sky.git
+   cd sky
    ```
 
 2. **Create and activate virtual environment:**
