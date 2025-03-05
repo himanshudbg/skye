@@ -2,7 +2,7 @@
 
 A modern social networking platform built with Django and TailwindCSS, featuring a Twitter/X inspired interface with enhanced user experience and premium features.
 
-![Social Media Platform](network/static/network/Images/screenshot.png)
+![Social Media Platform](network/static/network/Images/screenshot1.png)(network/static/network/Images/screenshot2.png)
 
 ## Table of Contents
 
