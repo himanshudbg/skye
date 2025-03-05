@@ -47,7 +47,7 @@ A modern social networking platform built with Django and TailwindCSS, featuring
 1. **Clone the repository:**
    ```bash
    git clone https://github.com/himanshudbg/skye.git
-   cd sky
+   cd skye
    ```
 
 2. **Create and activate virtual environment:**
