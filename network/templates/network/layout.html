@@ -1,0 +1,185 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Social Network{% endblock %}</title>
+    <!-- TailwindCSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="shortcut icon" href="{% static 'network/Images/favicon.ico' %}" />
+    <!-- Google Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    {% block head %}{% endblock %}
+  </head>
+  <body class="bg-gray-900 text-white">
+    <!-- Mobile Bottom Navigation (icons only) -->
+    <nav class="fixed bottom-0 left-0 right-0 bg-gray-800 border-t border-gray-700 flex justify-around items-center py-2 md:hidden z-50 rounded-t-lg">
+      <a href="{% url 'index' %}" class="flex flex-col items-center text-gray-400 hover:text-blue-400">
+        <span class="material-icons">home</span>
+        <span class="text-xs hidden">Home</span>
+      </a>
+      <a href="{% url 'following' %}" class="flex flex-col items-center text-gray-400 hover:text-blue-400">
+        <span class="material-icons">people</span>
+        <span class="text-xs hidden">Following</span>
+      </a>
+      <a href="{% url 'createpost' %}" class="flex flex-col items-center text-gray-400 hover:text-blue-400">
+        <span class="material-icons">add_circle_outline</span>
+        <span class="text-xs hidden">Post</span>
+      </a>
+      {% if user.is_authenticated %}
+        <a href="{% url 'profile' user.username %}" class="flex flex-col items-center text-gray-400 hover:text-blue-400">
+          <span class="material-icons">person</span>
+          <span class="text-xs hidden">Profile</span>
+        </a>
+      {% else %}
+        <a href="{% url 'login' %}" class="flex flex-col items-center text-gray-400 hover:text-blue-400">
+          <span class="material-icons">login</span>
+          <span class="text-xs hidden">Log In</span>
+        </a>
+      {% endif %}
+      <a href="{% url 'search_users' %}" class="flex flex-col items-center text-gray-400 hover:text-blue-400">
+        <span class="material-icons">search</span>
+        <span class="text-xs hidden">Search</span>
+      </a>
+    </nav>
+
+    <div class="flex">
+      <!-- Left Sidebar (Desktop - original design) -->
+      <aside class="hidden md:flex fixed top-0 left-0 h-screen w-64 bg-gray-800 p-4 flex-col justify-between rounded-r-lg shadow-lg">
+        <!-- Top Navigation -->
+        <div>
+          <!-- Brand Logo -->
+          <a href="{% url 'index' %}" class="mb-8 block">
+            <img src="{% static 'network/Images/logo.png' %}" alt="Logo" class="h-9 ml-2 mt-2">
+          </a>
+          <ul class="space-y-2">
+            <li id="all_posts">
+              <a href="{% url 'index' %}" class="flex items-center p-2 hover:bg-gray-700 rounded transition-colors">
+                <span class="material-icons">dashboard</span>
+                <span class="ml-2">All Posts</span>
+              </a>
+            </li>
+            {% if user.is_authenticated %}
+              <li id="following">
+                <a href="{% url 'following' %}" class="flex items-center p-2 hover:bg-gray-700 rounded transition-colors">
+                  <span class="material-icons">people</span>
+                  <span class="ml-2">Following</span>
+                </a>
+              </li>
+              <li id="premium">
+                <a href="{% url 'premium_subscription' %}" class="flex items-center p-2 hover:bg-gray-700 rounded transition-colors">
+                  <span class="material-icons text-blue-600">verified</span>
+                  <span class="ml-2">Premium</span>
+                </a>
+              </li>
+              <li id="saved">
+                <a href="{% url 'saved' %}" class="flex items-center p-2 hover:bg-gray-700 rounded transition-colors">
+                  <span class="material-icons">bookmark</span>
+                  <span class="ml-2">Saved</span>
+                </a>
+              </li>
+              <li id="profile">
+                <a href="{% url 'profile' user.username %}" class="flex items-center p-2 hover:bg-gray-700 rounded transition-colors">
+                  <span class="material-icons">person</span>
+                  <span class="ml-2">Profile</span>
+                </a>
+              </li>
+              <li id="logout">
+                <a href="{% url 'logout' %}" class="flex items-center p-2 hover:bg-gray-700 rounded transition-colors">
+                  <span class="material-icons">logout</span>
+                  <span class="ml-2">Log Out</span>
+                </a>
+              </li>
+            {% else %}
+              <li id="login">
+                <a href="{% url 'login' %}" class="flex items-center p-2 hover:bg-gray-700 rounded transition-colors">
+                  <span class="material-icons">login</span>
+                  <span class="ml-2">Log In</span>
+                </a>
+              </li>
+              <li id="signup">
+                <a href="{% url 'register' %}" class="flex items-center p-2 hover:bg-gray-700 rounded transition-colors">
+                  <span class="material-icons">person_add</span>
+                  <span class="ml-2">Sign Up</span>
+                </a>
+              </li>
+            {% endif %}
+          </ul>
+          {% if user.is_authenticated %}
+            <a href="{% url 'createpost' %}" class="block bg-blue-600 hover:bg-blue-700 text-center py-2 rounded-full transition-colors w-full mt-4">
+              Create Post
+            </a>
+          {% endif %}
+        </div>
+        <!-- Bottom Profile Info -->
+        {% if user.is_authenticated %}
+          <div class="pt-4 border-t border-gray-700">
+            <a href="{% url 'profile' user.username %}" class="flex items-center p-2 hover:bg-gray-700 rounded transition-colors">
+              <div class="w-10 h-10 rounded-full bg-cover bg-center" style="background-image: url(/media/{{ user.profile_pic }});"></div>
+              <div class="ml-3">
+                <div class="text-sm font-bold flex items-center">
+                  {{ user.first_name }} {{ user.last_name }}
+                  {% if user.is_premium %}
+                    <span class="material-icons text-blue-400 text-sm ml-1">verified</span>
+                  {% endif %}
+                </div>
+                <div class="text-xs text-gray-400">@{{ user.username }}</div>
+              </div>
+            </a>
+          </div>
+          <input type="hidden" id="user_is_authenticated" value="True" data-username="{{ user.username }}">
+        {% else %}
+          <input type="hidden" id="user_is_authenticated" value="False">
+        {% endif %}
+      </aside>
+      
+      <!-- Main Content Area -->
+      <main class="flex-1 p-4 md:ml-64 md:mr-80">
+        {% block body %}{% endblock %}
+      </main>
+      
+      <!-- Right Sidebar (Fixed on Desktop) -->
+      <aside class="hidden lg:flex fixed top-0 right-0 h-screen w-80 bg-gray-800 p-4 flex-col rounded-l-lg shadow-lg overflow-y-auto">
+        {% if user.is_authenticated %}
+          <!-- Search Box -->
+          <div class="bg-gray-700 rounded-lg p-4 mb-4">
+            <form action="{% url 'search_users' %}" method="get">
+              <input type="text" name="query" placeholder="Search users" class="w-full bg-gray-600 text-white rounded p-2 focus:outline-none" />
+            </form>
+          </div>
+          <!-- Who to follow -->
+          <div class="bg-gray-700 rounded-lg p-4 flex-1">
+            <h3 class="text-lg font-bold mb-2">Who to follow</h3>
+            <div class="space-y-3">
+              {% for suggestion in suggestions %}
+                <div class="flex items-center hover:bg-gray-600 p-2 rounded transition-colors">
+                  <div class="w-8 h-8 rounded-full bg-cover bg-center" style="background-image: url(/media/{{ suggestion.profile_pic }});" ></div>
+                  <div class="ml-3">
+                    <a href="{% url 'profile' suggestion.username %}" class="font-bold text-sm flex items-center">
+                      {{ suggestion.first_name }} {{ suggestion.last_name }}
+                      {% if suggestion.is_premium %}
+                        <span class="material-icons text-blue-400 text-sm ml-1">verified</span>
+                      {% endif %}
+                    </a>
+                    <div class="text-xs text-gray-400">@{{ suggestion.username }}</div>
+                  </div>
+                  <button class="ml-auto bg-blue-600 hover:bg-blue-700 text-xs text-white py-1 px-3 rounded-full" type="button" onclick="followUser(this, '{{ suggestion.username }}')">
+                    Follow
+                  </button>
+                </div>
+              {% empty %}
+                <div class="text-center text-gray-400 text-sm">
+                  No suggestions available.
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        {% endif %}
+      </aside>
+    </div>
+        
+    <!-- Minimal JS for like/comment functionality -->
+    <script src="{% static 'network/layout.js' %}"></script>
+  </body>
+</html>

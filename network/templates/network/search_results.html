@@ -1,0 +1,19 @@
+{% extends 'network/layout.html' %}
+{% block body %}
+<div class="max-w mx-auto mt-8">
+  <h2 class="text-2xl font-bold mb-4">Search Results for "{{ query }}"</h2>
+  <div class="space-y-4">
+    {% for user in users %}
+      <div class="flex items-center bg-gray-800 p-4 rounded shadow">
+        <div class="w-10 h-10 rounded-full bg-cover bg-center" style="background-image: url(/media/{{ user.profile_pic }});"></div>
+        <div class="ml-4">
+          <a href="{% url 'profile' user.username %}" class="font-bold text-white">{{ user.first_name }} {{ user.last_name }}</a>
+          <div class="text-gray-400">@{{ user.username }}</div>
+        </div>
+      </div>
+    {% empty %}
+      <p class="text-gray-400">No users found.</p>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

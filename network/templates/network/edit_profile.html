@@ -1,0 +1,73 @@
+{% extends "network/layout.html" %}
+{% load static %}
+
+{% block body %}
+<div class="main-div max-w mx-auto">
+  <div class="left-div">
+    <h2 class="text-2xl font-bold mb-4">Edit Profile</h2>
+    <div class="left-div-content">
+      <form action="{% url 'edit_profile' %}" method="post" enctype="multipart/form-data" class="bg-gray-800 p-6 rounded shadow space-y-4">
+        {% csrf_token %}
+        <div class="space-y-2">
+          <label for="first_name" class="block text-gray-400 text-sm mb-1">First Name</label>
+          <input type="text" 
+                 id="first_name" 
+                 name="first_name" 
+                 value="{{ user.first_name }}" 
+                 class="w-full bg-gray-700 text-white rounded p-3 focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                 placeholder="First Name">
+        </div>
+        <div class="space-y-2">
+          <label for="last_name" class="block text-gray-400 text-sm mb-1">Last Name</label>
+          <input type="text" 
+                 id="last_name" 
+                 name="last_name" 
+                 value="{{ user.last_name }}" 
+                 class="w-full bg-gray-700 text-white rounded p-3 focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                 placeholder="Last Name">
+        </div>
+        <div class="space-y-2">
+          <label for="bio" class="block text-gray-400 text-sm mb-1">Bio</label>
+          <textarea id="bio" 
+                    name="bio" 
+                    rows="3" 
+                    class="w-full bg-gray-700 text-white rounded p-3 focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                    placeholder="Bio">{{ user.bio }}</textarea>
+        </div>
+        <div class="space-y-2">
+          <label class="block text-gray-400 text-sm mb-1">Profile Picture</label>
+          <input type="file" 
+                 id="profile_pic" 
+                 name="profile_pic" 
+                 accept="image/*" 
+                 class="w-full text-sm text-gray-400
+                        file:mr-4 file:py-2 file:px-4
+                        file:rounded-full file:border-0
+                        file:text-sm file:font-semibold
+                        file:bg-blue-600 file:text-white
+                        hover:file:bg-blue-700">
+        </div>
+        <div class="space-y-2">
+          <label class="block text-gray-400 text-sm mb-1">Cover Photo</label>
+          <input type="file" 
+                 id="cover" 
+                 name="cover" 
+                 accept="image/*" 
+                 class="w-full text-sm text-gray-400
+                        file:mr-4 file:py-2 file:px-4
+                        file:rounded-full file:border-0
+                        file:text-sm file:font-semibold
+                        file:bg-blue-600 file:text-white
+                        hover:file:bg-blue-700">
+        </div>
+        <div class="flex justify-end">
+          <button type="submit" 
+                  class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 py-2 rounded-full transition-colors">
+            Save Changes
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
