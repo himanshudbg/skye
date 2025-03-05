@@ -177,4 +177,14 @@ A modern social networking platform built with Django and TailwindCSS, featuring
 ## License
 
 This project is licensed under the MIT License.
+
+## Acknowledgments
+
+- **Django:** For providing a robust web framework
+- **TailwindCSS:** For the modern and responsive design system
+- **Google Material Icons:** For the comprehensive icon set
+- **Razorpay:** For secure payment integration
+- **Twitter/X:** For interface inspiration
+- **CS50W:** For project inspiration and guidance
+- **Open Source Community:** For various tools and libraries used in this project
 ```
