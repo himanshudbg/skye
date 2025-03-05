@@ -1,4 +1,4 @@
-# Sky - Social Media Platform
+# Skye - Social Media Platform
 
 A modern social networking platform built with Django and TailwindCSS, featuring a Twitter/X inspired interface with enhanced user experience and premium features.
 
@@ -46,7 +46,7 @@ A modern social networking platform built with Django and TailwindCSS, featuring
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/himanshudbg/sky.git
+   git clone https://github.com/himanshudbg/skye.git
    cd sky
    ```
 
