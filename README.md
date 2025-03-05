@@ -1,9 +1,8 @@
-```
-# Social Network Platform
+# Sky - Social Media Platform
 
-A modern social networking platform built with Django and TailwindCSS, featuring a Twitter-inspired interface with enhanced user experience and premium features.
+A modern social networking platform built with Django and TailwindCSS, featuring a Twitter/X inspired interface with enhanced user experience and premium features.
 
-![Social Network Platform](network/static/network/Images/screenshot.png)
+![Social Media Platform](network/static/network/Images/screenshot.png)
 
 ## Table of Contents
 
