@@ -1,8 +1,6 @@
 *.pyc
 __pycache__
-media/
 .env
 .DS_Store
-staticfiles/
 *.log
 local_settings.py
