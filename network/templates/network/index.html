@@ -75,7 +75,7 @@
         onclick="toggleLike(this, event)">
   <span class="svg-span">
     {% if user in post.likers.all %}
-      <span class="material-icons text-red-500 text-2xl">favorite</span>
+      <span class="material-icons text-white-500 text-2xl">favorite</span>
     {% else %}
       <span class="material-icons text-2xl">favorite_border</span>
     {% endif %}
@@ -97,7 +97,7 @@ onclick="toggleComment(this, event)">
   onclick="toggleSave(this, event)">
     <span class="svg-span ">
     {% if user in post.savers.all %}
-    <span class="material-icons text-green-500 text-2xl">bookmark</span>
+    <span class="material-icons text-white-500 text-2xl">bookmark</span>
     {% else %}
     <span class="material-icons hover:text-green-500 text-2xl">bookmark_border</span>
     {% endif %}

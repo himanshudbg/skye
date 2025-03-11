@@ -13,125 +13,102 @@
     {% block head %}{% endblock %}
   </head>
   <body class="bg-gray-900 text-white">
-    <!-- Mobile Bottom Navigation (icons only) -->
-    <nav class="fixed bottom-0 left-0 right-0 bg-gray-800 border-t border-gray-700 flex justify-around items-center py-2 md:hidden z-50 rounded-t-lg">
-      <a href="{% url 'index' %}" class="flex flex-col items-center text-gray-400 hover:text-blue-400">
-        <span class="material-icons">home</span>
-        <span class="text-xs hidden">Home</span>
+    <!-- Mobile Bottom Navigation (Twitter-like) -->
+    <nav class="fixed bottom-0 left-0 right-0 bg-gray-900 border-t border-gray-700 flex justify-around items-center py-2 md:hidden z-50">
+      <a href="{% url 'index' %}" class="flex flex-col items-center hover:text-blue-400">
+        <span class="material-icons text-2xl p-2 rounded-md hover:bg-gray-800">home</span>
       </a>
-      <a href="{% url 'following' %}" class="flex flex-col items-center text-gray-400 hover:text-blue-400">
-        <span class="material-icons">people</span>
-        <span class="text-xs hidden">Following</span>
-      </a>
-      <a href="{% url 'createpost' %}" class="flex flex-col items-center text-gray-400 hover:text-blue-400">
-        <span class="material-icons">add_circle_outline</span>
-        <span class="text-xs hidden">Post</span>
+      <a href="{% url 'following' %}" class="flex flex-col items-center hover:text-blue-400">
+        <span class="material-icons text-2xl p-2 rounded-md hover:bg-gray-800">explore</span>
       </a>
       {% if user.is_authenticated %}
-        <a href="{% url 'profile' user.username %}" class="flex flex-col items-center text-gray-400 hover:text-blue-400">
-          <span class="material-icons">person</span>
-          <span class="text-xs hidden">Profile</span>
-        </a>
-      {% else %}
-        <a href="{% url 'login' %}" class="flex flex-col items-center text-gray-400 hover:text-blue-400">
-          <span class="material-icons">login</span>
-          <span class="text-xs hidden">Log In</span>
-        </a>
-      {% endif %}
-      <a href="{% url 'search_users' %}" class="flex flex-col items-center text-gray-400 hover:text-blue-400">
-        <span class="material-icons">search</span>
-        <span class="text-xs hidden">Search</span>
+      <a href="{% url 'createpost' %}" class="flex flex-col items-center hover:text-blue-400">
+        <span class="material-icons text-2xl p-2 rounded-md hover:bg-gray-800">add_circle</span>
       </a>
+      {% endif %}
+      {% if user.is_authenticated %}
+      <a href="{% url 'profile' user.username %}" class="flex flex-col items-center hover:text-blue-400">
+        <span class="material-icons text-2xl p-2 rounded-md hover:bg-gray-800">person</span>
+      </a>
+      {% else %}
+      <a href="{% url 'login' %}" class="flex flex-col items-center hover:text-blue-400">
+        <span class="material-icons text-2xl p-2 rounded-md hover:bg-gray-800">login</span>
+      </a>
+      {% endif %}
+      <!-- Profile (Authenticated) / Login (Not Authenticated) -->
+      {% if user.is_authenticated %}
+      <a href="{% url 'logout' %}" class="flex flex-col items-center hover:text-blue-400">
+        <span class="material-icons text-2xl p-2 rounded-md hover:bg-gray-800">logout</span>
+      </a>
+      {% else %}
+      <a href="{% url 'login' %}" class="flex flex-col items-center hover:text-blue-400">
+        <span class="material-icons text-2xl p-2 rounded-md hover:bg-gray-800">login</span>
+      </a>
+      {% endif %}
     </nav>
-
+    
     <div class="flex">
-      <!-- Left Sidebar (Desktop - original design) -->
-      <aside class="hidden md:flex fixed top-0 left-0 h-screen w-64 bg-gray-800 p-4 flex-col justify-between rounded-r-lg shadow-lg">
-        <!-- Top Navigation -->
+      <!-- Left Sidebar (Twitter-like) -->
+      <aside class="hidden md:flex fixed top-0 left-0 h-screen w-64 bg-gray-900 p-6 pt-0 flex-col justify-between">
         <div>
-          <!-- Brand Logo -->
-          <a href="{% url 'index' %}" class="mb-8 block">
-            <img src="{% static 'network/Images/logo.png' %}" alt="Logo" class="h-9 ml-2 mt-2">
+          <!-- Logo -->
+          <a href="{% url 'index' %}" class="m-6">
+            <img src="{% static 'network/Images/logo.png' %}" alt="Logo" class="h-8">
           </a>
-          <ul class="space-y-2">
-            <li id="all_posts">
-              <a href="{% url 'index' %}" class="flex items-center p-2 hover:bg-gray-700 rounded transition-colors">
-                <span class="material-icons">dashboard</span>
-                <span class="ml-2">All Posts</span>
-              </a>
-            </li>
-            {% if user.is_authenticated %}
-              <li id="following">
-                <a href="{% url 'following' %}" class="flex items-center p-2 hover:bg-gray-700 rounded transition-colors">
-                  <span class="material-icons">people</span>
-                  <span class="ml-2">Following</span>
-                </a>
-              </li>
-              <li id="premium">
-                <a href="{% url 'premium_subscription' %}" class="flex items-center p-2 hover:bg-gray-700 rounded transition-colors">
-                  <span class="material-icons text-blue-600">verified</span>
-                  <span class="ml-2">Premium</span>
-                </a>
-              </li>
-              <li id="saved">
-                <a href="{% url 'saved' %}" class="flex items-center p-2 hover:bg-gray-700 rounded transition-colors">
-                  <span class="material-icons">bookmark</span>
-                  <span class="ml-2">Saved</span>
-                </a>
-              </li>
-              <li id="profile">
-                <a href="{% url 'profile' user.username %}" class="flex items-center p-2 hover:bg-gray-700 rounded transition-colors">
-                  <span class="material-icons">person</span>
-                  <span class="ml-2">Profile</span>
-                </a>
-              </li>
-              <li id="logout">
-                <a href="{% url 'logout' %}" class="flex items-center p-2 hover:bg-gray-700 rounded transition-colors">
-                  <span class="material-icons">logout</span>
-                  <span class="ml-2">Log Out</span>
-                </a>
-              </li>
-            {% else %}
-              <li id="login">
-                <a href="{% url 'login' %}" class="flex items-center p-2 hover:bg-gray-700 rounded transition-colors">
-                  <span class="material-icons">login</span>
-                  <span class="ml-2">Log In</span>
-                </a>
-              </li>
-              <li id="signup">
-                <a href="{% url 'register' %}" class="flex items-center p-2 hover:bg-gray-700 rounded transition-colors">
-                  <span class="material-icons">person_add</span>
-                  <span class="ml-2">Sign Up</span>
-                </a>
-              </li>
-            {% endif %}
-          </ul>
-          {% if user.is_authenticated %}
-            <a href="{% url 'createpost' %}" class="block bg-blue-600 hover:bg-blue-700 text-center py-2 rounded-full transition-colors w-full mt-4">
-              Create Post
+          <!-- Navigation Menu -->
+          <nav class="space-y-4">
+            <a href="{% url 'index' %}" class="flex items-center p-2 hover:bg-gray-800 rounded-md transition-all">
+              <span class="material-icons text-xl">home</span>
+              <span class="ml-4 text-xl font-bold">Home</span>
             </a>
+            <a href="{% url 'following' %}" class="flex items-center p-2 hover:bg-gray-800 rounded-md transition-all">
+              <span class="material-icons text-xl">explore</span>
+              <span class="ml-4 text-xl font-bold">Explore</span>
+            </a>
+            <a href="{% url 'saved' %}" class="flex items-center p-2 hover:bg-gray-800 rounded-md transition-all">
+              <span class="material-icons text-xl">bookmark_border</span>
+              <span class="ml-4 text-xl font-bold">Bookmarks</span>
+            </a>
+            {% if user.is_authenticated %}
+            <a href="{% url 'profile' user.username %}" class="flex items-center p-2 hover:bg-gray-800 rounded-md transition-all">
+              <span class="material-icons text-xl">person_outline</span>
+              <span class="ml-4 text-xl font-bold">Profile</span>
+            </a>
+            {% endif %}
+                  <!-- Profile (Authenticated) / Login (Not Authenticated) -->
+      {% if user.is_authenticated %}
+      <a href="{% url 'logout' %}" class="flex items-center p-2 hover:bg-gray-800 rounded-md transition-all">
+        <span class="material-icons text-xl">logout</span>
+        <span class="ml-4 text-xl font-bold">Logout</span>
+      </a>
+      {% else %}
+      <a href="{% url 'login' %}" class="flex items-center p-2 hover:bg-gray-800 rounded-md transition-all">
+        <span class="material-icons text-xl">login</span>
+        <span class="ml-4 text-xl font-bold">Login</span>
+      </a>
+      {% endif %}
+          </nav>
+          {% if user.is_authenticated %}
+          <!-- Post Button (was Tweet) -->
+          <a href="{% url 'createpost' %}"
+             class="mt-6 inline-flex items-center justify-center
+                    text-white font-bold py-2 px-6 rounded-md transition-all
+                    bg-[#2463EB] hover:bg-[#1b4bbd]">
+            Post
+          </a>
           {% endif %}
         </div>
-        <!-- Bottom Profile Info -->
         {% if user.is_authenticated %}
-          <div class="pt-4 border-t border-gray-700">
-            <a href="{% url 'profile' user.username %}" class="flex items-center p-2 hover:bg-gray-700 rounded transition-colors">
-              <div class="w-10 h-10 rounded-full bg-cover bg-center" style="background-image: url(/media/{{ user.profile_pic }});"></div>
-              <div class="ml-3">
-                <div class="text-sm font-bold flex items-center">
-                  {{ user.first_name }} {{ user.last_name }}
-                  {% if user.is_premium %}
-                    <span class="material-icons text-blue-400 text-sm ml-1">verified</span>
-                  {% endif %}
-                </div>
-                <div class="text-xs text-gray-400">@{{ user.username }}</div>
-              </div>
-            </a>
-          </div>
-          <input type="hidden" id="user_is_authenticated" value="True" data-username="{{ user.username }}">
-        {% else %}
-          <input type="hidden" id="user_is_authenticated" value="False">
-        {% endif %}
+        <!-- User Profile Info -->
+      <a href="{% url 'profile' user.username %}" class="flex items-center p-2 hover:bg-gray-800 rounded-md transition-all">
+        <img src="/media/{{ user.profile_pic }}" alt="Profile Pic" class="w-10 h-10 rounded-full object-cover">
+        <div class="ml-3">
+          <div class="font-bold">{{ user.first_name }} {{ user.last_name }}</div>
+          <div class="text-gray-500 text-sm">@{{ user.username }}</div>
+        </div>
+      </a>
+      {% endif %}
+
       </aside>
       
       <!-- Main Content Area -->
@@ -139,43 +116,44 @@
         {% block body %}{% endblock %}
       </main>
       
-      <!-- Right Sidebar (Fixed on Desktop) -->
-      <aside class="hidden lg:flex fixed top-0 right-0 h-screen w-80 bg-gray-800 p-4 flex-col rounded-l-lg shadow-lg overflow-y-auto">
-        {% if user.is_authenticated %}
+      <!-- Right Sidebar (Twitter-like) -->
+      <aside class="hidden lg:flex fixed top-0 right-0 h-screen w-80 bg-gray-900 p-4 overflow-y-auto">
+        <div class="w-full">
           <!-- Search Box -->
-          <div class="bg-gray-700 rounded-lg p-4 mb-4">
-            <form action="{% url 'search_users' %}" method="get">
-              <input type="text" name="query" placeholder="Search users" class="w-full bg-gray-600 text-white rounded p-2 focus:outline-none" />
-            </form>
+          <div class="relative mb-4">
+            <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+              <span class="material-icons text-gray-500">search</span>
+            </span>
+            <input type="text" placeholder="Search Twitter" class="w-full bg-gray-800 rounded-md pl-10 pr-4 py-2 focus:outline-none" />
           </div>
-          <!-- Who to follow -->
-          <div class="bg-gray-700 rounded-lg p-4 flex-1">
-            <h3 class="text-lg font-bold mb-2">Who to follow</h3>
+          {% if user.is_authenticated %}
+          <!-- Who to Follow -->
+          <div class="bg-gray-800 rounded-md p-4 transition-all">
+            <h3 class="text-xl font-bold mb-4">Who to follow</h3>
             <div class="space-y-3">
               {% for suggestion in suggestions %}
-                <div class="flex items-center hover:bg-gray-600 p-2 rounded transition-colors">
-                  <div class="w-8 h-8 rounded-full bg-cover bg-center" style="background-image: url(/media/{{ suggestion.profile_pic }});" ></div>
+              <div class="flex items-center justify-between hover:bg-gray-700 p-2 rounded-md transition-all">
+                <div class="flex items-center">
+                  <img src="/media/{{ suggestion.profile_pic }}" alt="Profile Pic" class="w-10 h-10 rounded-full object-cover">
                   <div class="ml-3">
-                    <a href="{% url 'profile' suggestion.username %}" class="font-bold text-sm flex items-center">
-                      {{ suggestion.first_name }} {{ suggestion.last_name }}
-                      {% if suggestion.is_premium %}
-                        <span class="material-icons text-blue-400 text-sm ml-1">verified</span>
-                      {% endif %}
-                    </a>
+                    <a href="{% url 'profile' suggestion.username %}" class="font-bold text-sm">{{ suggestion.first_name }} {{ suggestion.last_name }}</a>
                     <div class="text-xs text-gray-400">@{{ suggestion.username }}</div>
                   </div>
-                  <button class="ml-auto bg-blue-600 hover:bg-blue-700 text-xs text-white py-1 px-3 rounded-full" type="button" onclick="followUser(this, '{{ suggestion.username }}')">
-                    Follow
-                  </button>
                 </div>
+                <button 
+                  class="bg-blue-600 hover:bg-blue-700 text-xs text-white py-1 px-3 rounded-md transition-all"
+                  type="button"
+                  onclick="followUser(this, '{{ suggestion.username }}')">
+                  Follow
+                </button>
+              </div>
               {% empty %}
-                <div class="text-center text-gray-400 text-sm">
-                  No suggestions available.
-                </div>
+              <div class="text-center text-gray-500 text-sm">No suggestions available.</div>
               {% endfor %}
             </div>
           </div>
-        {% endif %}
+          {% endif %}
+        </div>
       </aside>
     </div>
         
