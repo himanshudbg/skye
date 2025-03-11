@@ -4,8 +4,7 @@ A modern social networking platform built with Django and TailwindCSS, featuring
 
 🌐 **Live Demo:** [Visit Skye](https://eligible-kellyann-skyeapp-80f8e5cf.koyeb.app/n/login)
 
-![Social Media Platform](network/static/network/Images/screenshot1.png)
-![Social Media Platform](network/static/network/Images/screenshot2.png)
+![Social Media Platform](network/static/network/Images/skyemockup.png)
 
 ## Table of Contents
 
